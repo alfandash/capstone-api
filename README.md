@@ -1,7 +1,7 @@
 # API Documentation
 This API contain chinook.db data with some data wrangling. You can check data folder to get `chinook.db` to look RAW data before process in this end point
 
-Where full URLs are provided in responses they will be rendered as if service is running on 'http://testserver/'.
+Where full URLs are provided in responses they will be rendered as if service is running on 'https://algoritma-api-capstone.herokuapp.com/'.
 
 ___
 ## Open Endpoints : 
@@ -21,3 +21,10 @@ Return full data customer
 
 Most favorite Artist by User: `GET /customer/topbuy/<customerid>`
 Return list of Artists, Albums, Total Invoice where `<customerid>`. You can get customer id from other endpoint `GET /customer`
+
+## Example :
+
+- I want get list of county 
+
+Method = GET 
+URL =  https://algoritma-api-capstone.herokuapp.com/

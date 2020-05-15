@@ -2,6 +2,9 @@ from flask import Flask, request
 from flask import Response
 import pandas as pd
 import sqlite3
+import markdown
+import markdown.extensions.fenced_code
+from pygments.formatters import HtmlFormatter
 
 app = Flask(__name__)
 
@@ -104,6 +107,32 @@ def customer_topbuy(customerid):
                     status=200,
                     mimetype="application/json")
     return(resp)
+
+@app.route('/docs')
+def docs():
+    readme_file = open("README.md", "r")
+    md_template_string = markdown.markdown(
+        readme_file.read(), extensions=["fenced_code"]
+    )
+
+    formatter = HtmlFormatter(style="emacs",full=True,cssclass="codehilite")
+    css_string = formatter.get_style_defs()
+    md_css_string = "<style>" + css_string + "</style>"
+    md_template = md_css_string + md_template_string
+    return md_template
+
+@app.route('/')
+def index():
+    readme_file = open("README.md", "r")
+    md_template_string = markdown.markdown(
+        readme_file.read(), extensions=["fenced_code"]
+    )
+
+    formatter = HtmlFormatter(style="emacs",full=True,cssclass="codehilite")
+    css_string = formatter.get_style_defs()
+    md_css_string = "<style>" + css_string + "</style>"
+    md_template = md_css_string + md_template_string
+    return md_template
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
